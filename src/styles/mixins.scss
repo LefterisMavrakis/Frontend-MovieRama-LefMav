@@ -1,0 +1,6 @@
+@mixin background-image($padding, $size) {
+    background-size: $size;
+    padding: $padding;
+    background-position: center;
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+@import './variables.sass';
+@import './mixins.scss';
+
+html {
+    font-size: 14px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+body {
+    margin: 0;
+    line-height: 1.2;
+    background-color: #f4f4f4;
+}
+div {
+    text-align: left;
+}
+.mainLayoutWrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    .mainLayoutInner {
+        width: 100%;
+        max-width: 2000px;
+        position: relative;
+    }
+}
+.constraintPage {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.genericTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    position: relative;
+    &.lg {
+        font-size: 2rem;
+    }
+    &.xl {
+        font-size: 3.5rem;
+    }
+}
+.genericSubtitle {
+    font-size: 1rem;
+    font-weight: bold;
+    &.lg {
+        font-size: 1.5rem;
+    }
+    &.xl {
+        font-size: 2.2rem;
+    }
+}
+.genericOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: rgba(0,0,0,0.5);
+}
