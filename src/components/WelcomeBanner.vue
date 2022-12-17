@@ -24,7 +24,6 @@ import WelcomeBannerBg from "@/assets/WelcomeBannerBg.jpg";
 export default defineComponent({
   name: 'WelcomeBanner',
   setup() {
-
     return {
       WelcomeBannerBg
     }

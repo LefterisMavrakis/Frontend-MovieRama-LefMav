@@ -33,20 +33,34 @@
           {{ movie.overview }}
         </div>
       </div>
+      <div class="showMoreBtn genericTitle" @click="toggleMovieExpansion(true)">
+        Show More
+      </div>
     </div>
+    <div class="movieItemDetailsWrapper" :class="{ visible: expansionVisible }">
+      <div class="closeBtn" @click="toggleMovieExpansion(false)">
+        <font-awesome-icon :icon="['fas', 'times']" size="lg" />
+      </div>
+      <MovieItemDetails v-if="expansionVisible" :movie="movie" />
+    </div>
+
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue';
+import { defineComponent, PropType, computed, ref } from 'vue';
 import { Movie } from '@/interfaces/movies-interfaces';
 import useGenresStore from '@/stores/genres-store';
 import useConfig from '@/composables/use-config';
+import MovieItemDetails from './MovieItemDetails.vue';
 
 
 
 export default defineComponent({
   name: 'MovieItem',
+  components: {
+    MovieItemDetails
+  },
   props: {
     movie: {
       type: Object as PropType<Movie>,
@@ -60,6 +74,8 @@ export default defineComponent({
       movieGenresLoading
     } = useGenresStore()
 
+    const expansionVisible = ref<boolean>(false)
+
     const movieItemGenres = computed(() => {
       return movieGenres.value.filter(genre => props.movie.genre_ids
         .includes(genre.id as number)).map(genre => {
@@ -72,20 +88,26 @@ export default defineComponent({
       return fullDate.getFullYear()
     })
 
+    const toggleMovieExpansion = (show: boolean) => {
+      expansionVisible.value = show
+    }
+
 
     return {
       movieGenres,
       movieGenresLoading,
       movieItemGenres,
       getPostersBase,
-      movieItemReleaseYear
+      movieItemReleaseYear,
+      toggleMovieExpansion,
+      expansionVisible
     }
   }
 });
 </script>
 <style scoped lang="scss">
 .movieItem {
-  width: calc(50% - 20px);
+  width: calc(33.33% - 20px);
   margin: 0 10px 20px;
   padding: 0 0 0;
   box-sizing: border-box;
@@ -93,6 +115,8 @@ export default defineComponent({
   border-radius: 10px;
   display: flex;
   align-items: flex-start;
+  position: relative;
+  overflow-y: hidden;
 
   .moviePoster {
     width: 100%;
@@ -101,6 +125,7 @@ export default defineComponent({
       width: 100%;
       position: relative;
       @include background-image(75% 0, contain);
+      border-radius: 12px;
     }
   }
 
@@ -143,6 +168,41 @@ export default defineComponent({
         font-size: 1.05rem;
       }
     }
+
+    .showMoreBtn {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 20px 0 0;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+.movieItemDetailsWrapper {
+  position: absolute;
+  height: 100%;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  background-color: #ffffff;
+  width: 100%;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  padding: 30px 10px 20px;
+  box-sizing: border-box;
+
+
+  &.visible {
+    top: 0;
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
   }
 }
 </style>

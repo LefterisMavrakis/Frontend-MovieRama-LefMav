@@ -14,16 +14,19 @@ const getMoviesNowPlaying = (params: MoviesQueryString ): Promise<AxiosResponse>
       .catch((error: AxiosError) => reject(error));
   });
 };
+const getSimilarMovies = (movieId: number,params: MoviesQueryString ): Promise<AxiosResponse> => {
+  return new Promise((resolve, reject) => {
+    mainApi
+      .get(`/movie/${movieId}/similar`, {
+        params: params
+      })
+      .then((response: AxiosResponse) => resolve(response))
+      .catch((error: AxiosError) => reject(error));
+  });
+};
 
-// const getBrand = (brandId: string | number): Promise<AxiosResponse> => {
-//   return new Promise((resolve, reject) => {
-//     mainApi
-//       .get(`${ENDPOINT_NOW_PLAYING}/${brandId}`)
-//       .then((response: AxiosResponse) => resolve(response))
-//       .catch((error: AxiosError) => reject(error));
-//   });
-// };
 
 export {
     getMoviesNowPlaying,
+    getSimilarMovies
 };

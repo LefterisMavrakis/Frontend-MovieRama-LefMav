@@ -2,19 +2,19 @@
   <div class="moviesViewWrapper" ref="scrollView">
     <WelcomeBanner />
     <div class="moviesContainerWrapper">
-      <div class="constraintPage">
-        <div class="moviesContainerInner">
-          <div class="genericTitle lg">
+      <div class="moviesContainerInner">
+        <div class="genericTitle lg">
+          <div class="constraintPage">
             In Theater
           </div>
-          <div class="moviesContainer">
-            <template v-if="moviesNowPlaying">
-              <MovieItem v-for="movie in moviesNowPlaying" :movie="movie" :key="movie.id" />
-            </template>
-            <template v-if="moviesNowPlayingLoading">
-              ...Loading
-            </template>
-          </div>
+        </div>
+        <div class="moviesContainer">
+          <template v-if="moviesNowPlaying">
+            <MovieItem v-for="movie in moviesNowPlaying" :movie="movie" :key="movie.id" />
+          </template>
+          <template v-if="moviesNowPlayingLoading">
+            ...Loading
+          </template>
         </div>
       </div>
     </div>
@@ -47,9 +47,9 @@ export default defineComponent({
     const scrollView = ref<HTMLElement>()
 
 
-    fetchMovieGenres().then(() => {
-      fetchMoviesNowPlaying()
-    })
+    fetchMovieGenres()
+    fetchMoviesNowPlaying()
+
 
     const handleScroll = () => {
       let element = scrollView.value
@@ -90,6 +90,13 @@ export default defineComponent({
     position: relative;
     margin: 30px 0 0;
 
+    .generalTitle {
+      .constraintPage {
+        max-width: unset;
+      }
+    }
+
+
     .moviesContainerInner {
       width: 100%;
       position: relative;
@@ -101,6 +108,8 @@ export default defineComponent({
         display: flex;
         flex-wrap: wrap;
         margin: 0 0 0 -10px;
+        padding: 0 20px;
+        box-sizing: border-box;
       }
     }
   }

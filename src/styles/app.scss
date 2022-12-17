@@ -10,6 +10,7 @@ body {
     margin: 0;
     line-height: 1.2;
     background-color: #f4f4f4;
+    overflow-x: hidden;
 }
 div {
     text-align: left;
@@ -40,6 +41,9 @@ div {
     font-weight: bold;
     margin: 0 0 10px 0;
     position: relative;
+    &.sm {
+        font-size: 1.1rem;
+    }
     &.lg {
         font-size: 2rem;
     }
