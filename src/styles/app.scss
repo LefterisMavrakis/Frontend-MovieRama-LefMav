@@ -70,3 +70,26 @@ div {
     z-index: -1;
     background-color: rgba(0,0,0,0.5);
 }
+.genericLoader {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
+}
+.genericBtn {
+    cursor: pointer;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 370px) {
+    html {
+        font-size: 11px;
+    }
+}

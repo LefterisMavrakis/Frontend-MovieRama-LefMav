@@ -33,9 +33,9 @@
           {{ movie.overview }}
         </div>
       </div>
-      <div class="showMoreBtn genericTitle" @click="toggleMovieExpansion(true)">
-        Show More
-      </div>
+    </div>
+    <div class="showMoreBtn genericTitle" @click="toggleMovieExpansion(true)">
+      Show More
     </div>
     <div class="movieItemDetailsWrapper" :class="{ visible: expansionVisible }">
       <div class="closeBtn" @click="toggleMovieExpansion(false)">
@@ -107,7 +107,7 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 .movieItem {
-  width: calc(33.33% - 20px);
+  width: calc(20% - 20px);
   margin: 0 10px 20px;
   padding: 0 0 0;
   box-sizing: border-box;
@@ -117,15 +117,18 @@ export default defineComponent({
   align-items: flex-start;
   position: relative;
   overflow-y: hidden;
+  flex-wrap: wrap;
+  flex-direction: column;
 
   .moviePoster {
     width: 100%;
+    padding: 20px 20px 0;
+    box-sizing: border-box;
 
     .moviePosterBg {
       width: 100%;
       position: relative;
       @include background-image(75% 0, contain);
-      border-radius: 12px;
     }
   }
 
@@ -135,7 +138,7 @@ export default defineComponent({
     position: relative;
     flex-direction: column;
     align-items: flex-start;
-    padding: 11px 0 0 0;
+    margin: 5px 0 0 0;
 
     .movieInfo {
       width: 100%;
@@ -169,14 +172,16 @@ export default defineComponent({
       }
     }
 
-    .showMoreBtn {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin: 20px 0 0;
-      text-decoration: underline;
-      cursor: pointer;
-    }
+
+  }
+
+  .showMoreBtn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto 0 30px;
+    text-decoration: underline;
+    cursor: pointer;
   }
 }
 
@@ -204,5 +209,53 @@ export default defineComponent({
     right: 10px;
     cursor: pointer;
   }
+}
+
+@media (max-width: 1400px) {
+  .movieItem {
+    width: calc(33.33% - 20px);
+
+  }
+
+}
+
+@media (max-width: 900px) {
+  .movieItem {
+    width: calc(50% - 20px) !important;
+
+  }
+
+}
+
+@media (max-width: 640px) {
+  .moviesViewWrapper .moviesContainerWrapper .moviesContainerInner .moviesContainer {
+    width: calc(100% + 10px);
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 0 -5px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .movieItem {
+    margin: 0 5px 10px;
+    width: calc(50% - 10px) !important;
+
+    .moviePoster {
+      padding: 10px 10px 0;
+    }
+
+    .movieInfoWrapper .movieInfo {
+      padding: 5px 10px;
+    }
+  }
+}
+
+@media (max-width: 370px) {
+  .movieItem {
+    width: calc(100%) !important;
+
+  }
+
 }
 </style>

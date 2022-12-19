@@ -6,3 +6,4 @@ declare module '*.vue' {
 }
 declare module "@/assets/*"
 declare module "@fortawesome/*"
+declare module "lodash.*"

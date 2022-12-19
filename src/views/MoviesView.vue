@@ -13,7 +13,9 @@
             <MovieItem v-for="movie in moviesNowPlaying" :movie="movie" :key="movie.id" />
           </template>
           <template v-if="moviesNowPlayingLoading">
-            ...Loading
+            <div class="genericLoader">
+              <font-awesome-icon icon='fas fa-spinner' size="lg" class="faa-spin animated" />
+            </div>
           </template>
         </div>
       </div>
@@ -102,6 +104,7 @@ export default defineComponent({
       position: relative;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
 
       .moviesContainer {
         width: calc(100% + 20px);
@@ -112,6 +115,14 @@ export default defineComponent({
         box-sizing: border-box;
       }
     }
+  }
+}
+
+@media (max-width: 640px) {
+  .moviesViewWrapper .moviesContainerWrapper .moviesContainerInner .moviesContainer {
+    width: calc(100% + 10px);
+    margin: 0 0 0 -5px;
+    padding: 0 10px;
   }
 }
 </style>

@@ -5,7 +5,6 @@ export default function useHelper() {
   const arrayTake = <T>(arr: T[], qty = 1) => [...arr].splice(0, qty)
 
 
-
   return {
     arrayTake
   };

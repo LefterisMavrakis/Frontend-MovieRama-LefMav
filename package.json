@@ -17,6 +17,8 @@
     "@fortawesome/vue-fontawesome": "^3.0.2",
     "axios": "^1.2.1",
     "core-js": "^3.8.3",
+    "font-awesome-animation": "^1.1.1",
+    "lodash.debounce": "^4.0.8",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },
