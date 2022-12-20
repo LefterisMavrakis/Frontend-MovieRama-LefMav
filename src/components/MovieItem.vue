@@ -1,9 +1,15 @@
 <template>
   <div class="movieItem">
     <div class="moviePoster">
-      <div class="moviePosterBg" :style="`background-image:url(${getPostersBase()}${movie.poster_path})`">
-        <!-- <img :src="`${getPostersBase()}${movie.poster_path}`" /> -->
-      </div>
+      <template v-if="movie.poster_path">
+        <div class="moviePosterBg" :style="`background-image:url(${getPostersBase()}${movie.poster_path})`">
+          <!-- <img :src="`${getPostersBase()}${movie.poster_path}`" /> -->
+        </div>
+      </template>
+      <template v-else>
+        <div class="moviePosterBg" :style="`background-image:url(${noImagePlaceholder})`">
+        </div>
+      </template>
     </div>
     <div class="movieInfoWrapper">
       <div class="movieInfo movieTitle">
@@ -53,13 +59,14 @@ import { Movie } from '@/interfaces/movies-interfaces';
 import useGenresStore from '@/stores/genres-store';
 import useConfig from '@/composables/use-config';
 import MovieItemDetails from './MovieItemDetails.vue';
+import noImagePlaceholder from '@/assets/no-image-placeholder.png'
 
 
 
 export default defineComponent({
   name: 'MovieItem',
   components: {
-    MovieItemDetails
+    MovieItemDetails,
   },
   props: {
     movie: {
@@ -100,14 +107,15 @@ export default defineComponent({
       getPostersBase,
       movieItemReleaseYear,
       toggleMovieExpansion,
-      expansionVisible
+      expansionVisible,
+      noImagePlaceholder
     }
   }
 });
 </script>
 <style scoped lang="scss">
 .movieItem {
-  width: calc(20% - 20px);
+  width: calc(16.66% - 20px);
   margin: 0 10px 20px;
   padding: 0 0 0;
   box-sizing: border-box;
@@ -211,9 +219,24 @@ export default defineComponent({
   }
 }
 
+@media (max-width: 1600px) {
+  .movieItem {
+    width: calc(20% - 20px);
+  }
+
+}
+
 @media (max-width: 1400px) {
   .movieItem {
-    width: calc(33.33% - 20px);
+    width: calc(25% - 20px);
+
+  }
+
+}
+
+@media (max-width: 1100px) {
+  .movieItem {
+    width: calc(33.33% - 20px) !important;
 
   }
 

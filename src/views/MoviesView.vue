@@ -12,12 +12,12 @@
           <template v-if="moviesNowPlaying">
             <MovieItem v-for="movie in moviesNowPlaying" :movie="movie" :key="movie.id" />
           </template>
-          <template v-if="moviesNowPlayingLoading">
-            <div class="genericLoader">
-              <font-awesome-icon icon='fas fa-spinner' size="lg" class="faa-spin animated" />
-            </div>
-          </template>
         </div>
+        <template v-if="moviesNowPlayingLoading">
+          <div class="genericLoader absolute">
+            <font-awesome-icon icon='fas fa-spinner' size="lg" class="faa-spin animated" />
+          </div>
+        </template>
       </div>
     </div>
   </div>

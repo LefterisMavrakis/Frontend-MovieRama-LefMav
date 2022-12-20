@@ -43,7 +43,7 @@ export default defineComponent({
     BaseInput,
     MovieItem
   },
-  setup(props, ctx) {
+  setup() {
     const searchResultsEl = ref<HTMLElement>()
     const loadMoreEl = ref<Element>()
     const searchTerm = ref<string>('')
@@ -71,7 +71,7 @@ export default defineComponent({
       rootMargin: '0px',
       threshold: 1.0
     }
-    const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry: IntersectionObserverEntry) => {
         if (entry.isIntersecting) {
           console.log('im intersevting');
@@ -183,6 +183,12 @@ export default defineComponent({
       pointer-events: all;
       opacity: 1;
     }
+  }
+}
+
+@media (max-width: 640px) {
+  .searchMoviesWrapper .searchResults {
+    padding: 30px 10px 20px;
   }
 }
 </style>

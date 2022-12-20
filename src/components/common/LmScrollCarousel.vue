@@ -65,7 +65,7 @@ export default defineComponent({
     },
   },
   emits: ['update:modelValue'],
-  setup(props, ctx) {
+  setup(props) {
     const carouselViewport = ref<HTMLElement>()
     const carouselTrack = ref<HTMLElement>()
     const itemWidth = ref(120)
@@ -126,8 +126,10 @@ export default defineComponent({
         itemWidth.value = carouselTrack.value.children[0].clientWidth
       }
     }
-    const scrollHandler = (e: any) => {
-      carouselViewportScroll.value = e.target?.scrollLeft
+    const scrollHandler = (e: Event) => {
+      if (e.target instanceof Element) {
+        carouselViewportScroll.value = e.target?.scrollLeft
+      }
     }
     watch(carouselActivePage, (newVal, oldVal) => {
       if (carouselViewport.value) {
