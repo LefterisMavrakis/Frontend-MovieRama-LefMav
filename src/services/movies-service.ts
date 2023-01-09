@@ -1,6 +1,8 @@
 import { mainApi } from "@/plugins/axios";
 import { AxiosError, AxiosResponse } from "axios";
 import { MoviesQueryString, MoviesSearchQueryString } from "@/interfaces/movies-interfaces";
+import { mainApiGetRequest } from "./services-helper";
+
 
 const ENDPOINT_NOW_PLAYING = "/movie/now_playing";
 const ENDPOINT_SEARCH = "/search/movie";
@@ -15,6 +17,9 @@ const getMoviesNowPlaying = (params: MoviesQueryString ): Promise<AxiosResponse>
       .catch((error: AxiosError) => reject(error));
   });
 };
+
+const getMoviesNowPlayingV2 = mainApiGetRequest(ENDPOINT_NOW_PLAYING)
+
 const getSimilarMovies = (movieId: number,params: MoviesQueryString ): Promise<AxiosResponse> => {
   return new Promise((resolve, reject) => {
     mainApi
@@ -40,5 +45,6 @@ const searchMovies = (params: MoviesSearchQueryString ): Promise<AxiosResponse> 
 export {
     getMoviesNowPlaying,
     getSimilarMovies,
-    searchMovies
+    searchMovies,
+    getMoviesNowPlayingV2
 };

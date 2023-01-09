@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios';
 import { AxiosResponse } from 'axios';
 import { ref } from 'vue'
-import { MoviesQueryString } from "@/interfaces/movies-interfaces";
 import { MovieGenre, MovieGenreQueryString } from '@/interfaces/genres-interfaces';
 import { getMovieGenres } from '@/services/genres-service';
 import useConfig from '@/composables/use-config';
@@ -14,13 +13,13 @@ export default function useGenresStore() {
     const fetchMovieGenres = (params?: MovieGenreQueryString): Promise<AxiosResponse> => {
         return new Promise((resolve, reject)=>{
             movieGenresLoading.value = true
-            const paramsToSend: MoviesQueryString = {
+            const paramsToSend: MovieGenreQueryString = {
                 api_key: getApiKey(),
             }
             if(typeof params !== 'undefined' && typeof params.language !== 'undefined') {
                 paramsToSend.language = params.language
             }
-            getMovieGenres(paramsToSend).then((res: AxiosResponse) => {
+            getMovieGenres<MovieGenreQueryString>(paramsToSend).then((res: AxiosResponse) => {
                 movieGenres.value = res.data.genres
                 movieGenresLoading.value = false
                 resolve(res.data)

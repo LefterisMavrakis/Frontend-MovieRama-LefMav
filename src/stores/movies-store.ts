@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { AxiosResponse } from 'axios';
-import { getMoviesNowPlaying, getSimilarMovies, searchMovies } from "@/services/movies-service";
+import { getMoviesNowPlaying, getSimilarMovies, searchMovies, getMoviesNowPlayingV2 } from "@/services/movies-service";
 import { ref, computed } from 'vue'
 import { Movie, MoviesQueryString, MoviesFetchParams, MoviesSearchQueryString, MoviesSearchParams } from "@/interfaces/movies-interfaces";
 import useConfig from '@/composables/use-config';
@@ -48,7 +48,7 @@ export default function useMoviesStore() {
             if(typeof params !== 'undefined' && typeof params.region !== 'undefined') {
                 paramsToSend.region = params.region
             }
-            getMoviesNowPlaying(paramsToSend).then((res: AxiosResponse) => {
+            getMoviesNowPlayingV2<MoviesQueryString>(paramsToSend).then((res: AxiosResponse) => {
                 if(!appendItems) {
                     moviesNowPlaying.value = res.data.results
                 } else {
